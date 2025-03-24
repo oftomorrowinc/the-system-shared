@@ -1,0 +1,11 @@
+src/
+node_modules/
+.github/
+.gitignore
+tsconfig.json
+tsconfig.build.json
+.env
+.env.local
+eslint.config.mjs
+jest.config.js
+.vscode

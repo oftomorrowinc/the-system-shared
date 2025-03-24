@@ -1,9 +1,14 @@
 {
-  "name": "@the-system/shared",
+  "name": "the-system-shared",
   "version": "1.0.0",
   "private": true,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oftomorrowinc/the-system-shared.git"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsc -p tsconfig.json --watch",
