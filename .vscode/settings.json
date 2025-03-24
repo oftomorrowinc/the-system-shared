@@ -1,0 +1,26 @@
+{
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html"
+  },
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/out": true,
+    "**/.next": true,
+    "**/project-files.txt": true,
+    "**/package-code.sh": true,
+    "**/package-lock.*": true,
+    "**/pnpm-lock.yaml": true,
+  },
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "jest.rootPath": ".",
+  "jest.jestCommandLine": "pnpm test"
+}
