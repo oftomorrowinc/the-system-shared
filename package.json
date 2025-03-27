@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/oftomorrowinc/the-system-shared.git"
@@ -20,7 +22,6 @@
   "dependencies": {
     "build": "^0.1.4",
     "lucide-react": "^0.474.0",
-    "winston": "^3.17.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
