@@ -10,6 +10,7 @@ export declare const DocumentSchema: z.ZodObject<{
     projectId: z.ZodString;
     schemaId: z.ZodString;
     projectStep: z.ZodNullable<z.ZodNumber>;
+    isFinalOutput: z.ZodDefault<z.ZodBoolean>;
     todoId: z.ZodNullable<z.ZodString>;
     userId: z.ZodNullable<z.ZodString>;
     taskId: z.ZodNullable<z.ZodString>;
@@ -21,6 +22,7 @@ export declare const DocumentSchema: z.ZodObject<{
     projectId: string;
     schemaId: string;
     projectStep: number | null;
+    isFinalOutput: boolean;
     todoId: string | null;
     userId: string | null;
     taskId: string | null;
@@ -39,6 +41,7 @@ export declare const DocumentSchema: z.ZodObject<{
     taskId: string | null;
     value?: any;
     id?: string | undefined;
+    isFinalOutput?: boolean | undefined;
     createdAt?: unknown;
     updatedAt?: unknown;
     deleted?: boolean | undefined;
