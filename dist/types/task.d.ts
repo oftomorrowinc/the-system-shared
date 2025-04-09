@@ -8,18 +8,17 @@ export declare const TaskSchema: z.ZodObject<{
     organizationId: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     description: z.ZodString;
     successCriteria: z.ZodArray<z.ZodString, "many">;
-    training: z.ZodArray<z.ZodObject<{
-        url: z.ZodString;
-    }, "strip", z.ZodTypeAny, {
-        url: string;
-    }, {
-        url: string;
-    }>, "many">;
-    tips: z.ZodArray<z.ZodString, "many">;
+    processSteps: z.ZodArray<z.ZodString, "many">;
     inputSchemaId: z.ZodString;
     outputSchemaId: z.ZodString;
     tools: z.ZodDefault<z.ZodArray<z.ZodString, "many">>;
     subTasks: z.ZodDefault<z.ZodArray<z.ZodString, "many">>;
+    model: z.ZodOptional<z.ZodString>;
+    stopSequence: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+    maxOutputToken: z.ZodDefault<z.ZodNumber>;
+    temperature: z.ZodDefault<z.ZodNumber>;
+    topP: z.ZodDefault<z.ZodNumber>;
+    topK: z.ZodDefault<z.ZodNumber>;
     metrics: z.ZodObject<{
         totalAttempts: z.ZodNumber;
         successfulAttempts: z.ZodNumber;
@@ -74,14 +73,17 @@ export declare const TaskSchema: z.ZodObject<{
     };
     version: number;
     successCriteria: string[];
-    training: {
-        url: string;
-    }[];
-    tips: string[];
+    processSteps: string[];
     inputSchemaId: string;
     outputSchemaId: string;
     subTasks: string[];
+    maxOutputToken: number;
+    temperature: number;
+    topP: number;
+    topK: number;
     organizationId?: string | null | undefined;
+    model?: string | undefined;
+    stopSequence?: string[] | undefined;
 }, {
     name: string;
     description: string;
@@ -101,10 +103,7 @@ export declare const TaskSchema: z.ZodObject<{
         avgRating?: number | undefined;
     };
     successCriteria: string[];
-    training: {
-        url: string;
-    }[];
-    tips: string[];
+    processSteps: string[];
     inputSchemaId: string;
     outputSchemaId: string;
     tools?: string[] | undefined;
@@ -112,5 +111,11 @@ export declare const TaskSchema: z.ZodObject<{
     organizationId?: string | null | undefined;
     version?: number | undefined;
     subTasks?: string[] | undefined;
+    model?: string | undefined;
+    stopSequence?: string[] | undefined;
+    maxOutputToken?: number | undefined;
+    temperature?: number | undefined;
+    topP?: number | undefined;
+    topK?: number | undefined;
 }>;
 export type Task = WithRequired<z.infer<typeof TaskSchema>, 'description' | 'version' | 'deleted'>;

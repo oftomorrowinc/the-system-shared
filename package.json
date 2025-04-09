@@ -1,6 +1,6 @@
 {
   "name": "the-system-shared",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -15,6 +15,7 @@
     "dev": "tsc -p tsconfig.json --watch",
     "release": "npm run build && git add . && git commit -m \"Release v$npm_package_version\" && git tag -a v$npm_package_version -m \"Release v$npm_package_version\" && git push && git push --tags",
     "test": "jest --config jest.config.js",
+    "test:watch": "jest --config jest.config.js --watch",
     "lint": "eslint --ext .ts,.tsx .",
     "tscheck": "tsc --noEmit",
     "prettier": "prettier --write \"/*.{ts,tsx,js,jsx}\"",

@@ -10,19 +10,17 @@ export const TaskSchema = z.object({
   organizationId: z.string().nullable().optional(),
   description: z.string(),
   successCriteria: z.array(z.string()),
-  training: z.array(
-    z.object({
-      url: z.string(),
-    }),
-  ),
-  tips: z.array(z.string()),
-
-  // Schema IDs only
+  processSteps: z.array(z.string()),
   inputSchemaId: z.string(),
   outputSchemaId: z.string(),
-
   tools: z.array(z.string()).default([]),
   subTasks: z.array(z.string()).default([]),
+  model: z.string().optional(),
+  stopSequence: z.array(z.string()).optional(),
+  maxOutputToken: z.number().default(4096),
+  temperature: z.number().default(1),
+  topP: z.number().default(0.95),
+  topK: z.number().default(32),
   metrics: MetricsSchema,
   version: z.number().default(1),
   createdAt: z.string().datetime(),
