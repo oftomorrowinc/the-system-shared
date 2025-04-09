@@ -5,7 +5,7 @@ export declare const TaskSchema: z.ZodObject<{
     name: z.ZodString;
     role: z.ZodString;
     visibility: z.ZodEnum<["public", "private"]>;
-    organizationId: z.ZodOptional<z.ZodNullable<z.ZodString>>;
+    organizationId: z.ZodNullable<z.ZodOptional<z.ZodString>>;
     description: z.ZodString;
     successCriteria: z.ZodArray<z.ZodString, "many">;
     processSteps: z.ZodArray<z.ZodString, "many">;
@@ -13,8 +13,8 @@ export declare const TaskSchema: z.ZodObject<{
     outputSchemaId: z.ZodString;
     tools: z.ZodDefault<z.ZodArray<z.ZodString, "many">>;
     subTasks: z.ZodDefault<z.ZodArray<z.ZodString, "many">>;
-    model: z.ZodOptional<z.ZodString>;
-    stopSequence: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+    model: z.ZodNullable<z.ZodOptional<z.ZodString>>;
+    stopSequence: z.ZodNullable<z.ZodOptional<z.ZodArray<z.ZodString, "many">>>;
     maxOutputTokens: z.ZodDefault<z.ZodNumber>;
     temperature: z.ZodDefault<z.ZodNumber>;
     topP: z.ZodDefault<z.ZodNumber>;
@@ -82,8 +82,8 @@ export declare const TaskSchema: z.ZodObject<{
     topP: number;
     topK: number;
     organizationId?: string | null | undefined;
-    model?: string | undefined;
-    stopSequence?: string[] | undefined;
+    model?: string | null | undefined;
+    stopSequence?: string[] | null | undefined;
 }, {
     name: string;
     description: string;
@@ -111,8 +111,8 @@ export declare const TaskSchema: z.ZodObject<{
     organizationId?: string | null | undefined;
     version?: number | undefined;
     subTasks?: string[] | undefined;
-    model?: string | undefined;
-    stopSequence?: string[] | undefined;
+    model?: string | null | undefined;
+    stopSequence?: string[] | null | undefined;
     maxOutputTokens?: number | undefined;
     temperature?: number | undefined;
     topP?: number | undefined;
