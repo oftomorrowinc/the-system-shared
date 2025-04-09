@@ -15,7 +15,7 @@ export declare const TaskSchema: z.ZodObject<{
     subTasks: z.ZodDefault<z.ZodArray<z.ZodString, "many">>;
     model: z.ZodOptional<z.ZodString>;
     stopSequence: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
-    maxOutputToken: z.ZodDefault<z.ZodNumber>;
+    maxOutputTokens: z.ZodDefault<z.ZodNumber>;
     temperature: z.ZodDefault<z.ZodNumber>;
     topP: z.ZodDefault<z.ZodNumber>;
     topK: z.ZodDefault<z.ZodNumber>;
@@ -77,7 +77,7 @@ export declare const TaskSchema: z.ZodObject<{
     inputSchemaId: string;
     outputSchemaId: string;
     subTasks: string[];
-    maxOutputToken: number;
+    maxOutputTokens: number;
     temperature: number;
     topP: number;
     topK: number;
@@ -113,7 +113,7 @@ export declare const TaskSchema: z.ZodObject<{
     subTasks?: string[] | undefined;
     model?: string | undefined;
     stopSequence?: string[] | undefined;
-    maxOutputToken?: number | undefined;
+    maxOutputTokens?: number | undefined;
     temperature?: number | undefined;
     topP?: number | undefined;
     topK?: number | undefined;

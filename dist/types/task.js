@@ -19,7 +19,7 @@ exports.TaskSchema = zod_1.z.object({
     subTasks: zod_1.z.array(zod_1.z.string()).default([]),
     model: zod_1.z.string().optional(),
     stopSequence: zod_1.z.array(zod_1.z.string()).optional(),
-    maxOutputToken: zod_1.z.number().default(4096),
+    maxOutputTokens: zod_1.z.number().default(4096),
     temperature: zod_1.z.number().default(1),
     topP: zod_1.z.number().default(0.95),
     topK: zod_1.z.number().default(32),

@@ -17,7 +17,7 @@ export const TaskSchema = z.object({
   subTasks: z.array(z.string()).default([]),
   model: z.string().optional(),
   stopSequence: z.array(z.string()).optional(),
-  maxOutputToken: z.number().default(4096),
+  maxOutputTokens: z.number().default(4096),
   temperature: z.number().default(1),
   topP: z.number().default(0.95),
   topK: z.number().default(32),
