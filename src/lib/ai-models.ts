@@ -1,0 +1,407 @@
+export const AI_MODELS = [
+  {
+    "name": "GPT-4.1",
+    "displayName": "GPT-4.1 (Large)",
+    "modelName": "gpt-4.1",
+    "genkitName": "openai/gpt-4.1",
+    "provider": "openai",
+    "apiKeyName": "OPENAI_API_KEY",
+    "modelType": "text",
+    "firebaseFunction": "callGenericLLM",
+    "contextWindow": 1047576,
+    "temperature": {
+      "min": 0,
+      "max": 2.0,
+      "default": 1.0,
+      "step": 0.1
+    },
+    "topK": {
+      "min": 0,
+      "max": 100,
+      "default": 40,
+      "step": 5
+    },
+    "topP": {
+      "min": 0,
+      "max": 1.0,
+      "default": 0.95,
+      "step": 0.05
+    },
+    "maxOutputTokens": {
+      "min": 1024,
+      "max": 32768,
+      "default": 8192,
+      "step": 1024
+    }
+  },
+  {
+    "name": "GPT-4.1-mini",
+    "displayName": "GPT-4.1-mini (Small)",
+    "modelName": "gpt-4.1-mini",
+    "genkitName": "openai/gpt-4.1-mini",
+    "provider": "openai",
+    "apiKeyName": "OPENAI_API_KEY",
+    "modelType": "text",
+    "firebaseFunction": "callGenericLLM",
+    "contextWindow": 1047576,
+    "temperature": {
+      "min": 0,
+      "max": 2.0,
+      "default": 1.0,
+      "step": 0.1
+    },
+    "topK": {
+      "min": 0,
+      "max": 100,
+      "default": 40,
+      "step": 5
+    },
+    "topP": {
+      "min": 0,
+      "max": 1.0,
+      "default": 0.95,
+      "step": 0.05
+    },
+    "maxOutputTokens": {
+      "min": 1024,
+      "max": 32768,
+      "default": 8192,
+      "step": 1024
+    }
+  },
+  {
+    "name": "Claude-3-7-Sonnet",
+    "displayName": "Claude 3.7 Sonnet (Large)",
+    "modeltName": "claude-3-7-sonnet-latest",
+    "genkitName": "anthropic/claude-3-7-sonnet",
+    "provider": "anthropic",
+    "apiKeyName": "ANTHROPIC_API_KEY",
+    "modelType": "text",
+    "firebaseFunction": "callGenericLLM",
+    "contextWindow": 200000,
+    "temperature": {
+      "min": 0,
+      "max": 1.0,
+      "default": 0.7,
+      "step": 0.1
+    },
+    "topK": {
+      "min": 0,
+      "max": 100,
+      "default": 40,
+      "step": 5
+    },
+    "topP": {
+      "min": 0,
+      "max": 1.0,
+      "default": 0.95,
+      "step": 0.05
+    },
+    "maxOutputTokens": {
+      "min": 1024,
+      "max": 128000,
+      "default": 8192,
+      "step": 1024
+    },
+    "extraParameters": [
+      {
+        "name": "thinking",
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "Enable extended thinking mode"
+      },
+      {
+        "name": "thinkingBudget",
+        "type": "number",
+        "default": 1024,
+        "min": 1024,
+        "max": 128000,
+        "required": false,
+        "description": "Token budget for extended thinking (when thinking is enabled)",
+        "step": 1024
+      }
+    ]
+  },
+  {
+    "name": "Claude-3-5-Haiku",
+    "displayName": "Claude 3.5 Haiku (Small)",
+    "modelName": "claude-3-5-haiku-latest",
+    "genkitName": "anthropic/claude-3-5-haiku",
+    "provider": "anthropic",
+    "apiKeyName": "ANTHROPIC_API_KEY",
+    "modelType": "text",
+    "firebaseFunction": "callGenericLLM",
+    "contextWindow": 200000,
+    "temperature": {
+      "min": 0,
+      "max": 1.0,
+      "default": 0.7,
+      "step": 0.1
+    },
+    "topK": {
+      "min": 0,
+      "max": 100,
+      "default": 40,
+      "step": 5
+    },
+    "topP": {
+      "min": 0,
+      "max": 1.0,
+      "default": 0.95,
+      "step": 0.05
+    },
+    "maxOutputTokens": {
+      "min": 512,
+      "max": 8192,
+      "default": 4096,
+      "step": 512
+    }
+  },
+  {
+    "name": "Gemini-2-5-Pro",
+    "displayName": "Gemini 2.5 Pro (Large)",
+    "modelName": "vgemini-2.5-pro-exp-03-25",
+    "genkitName": "vertexai/gemini-2.5-pro-exp-03-25",
+    "provider": "google",
+    "apiKeyName": "GOOGLE_API_KEY",
+    "modelType": "text",
+    "firebaseFunction": "callGenericLLM",
+    "contextWindow": 1000000,
+    "temperature": {
+      "min": 0,
+      "max": 2.0,
+      "default": 1.0,
+      "step": 0.1
+    },
+    "topK": {
+      "min": 0,
+      "max": 100,
+      "default": 40,
+      "step": 5
+    },
+    "topP": {
+      "min": 0,
+      "max": 2.0,
+      "default": 0.95,
+      "step": 0.05
+    },
+    "maxOutputTokens": {
+      "min": 1024,
+      "max": 64000,
+      "default": 8192,
+      "step": 1024
+    },
+    "extraParameters": [
+      {
+        "name": "thinking",
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "Enable thinking mode"
+      },
+      {
+        "name": "thinkingBudget",
+        "type": "number",
+        "default": 1024,
+        "min": 1024,
+        "max": 24576,
+        "required": false,
+        "description": "Token budget for thinking when thinking is enabled",
+        "step": 1024
+      }
+    ]
+  },
+  {
+    "name": "Gemini-2-5-Flash",
+    "displayName": "Gemini 2.5 Flash (Small)",
+    "modelName": "gemini-2.5-flash-preview-04-17",
+    "genkitName": "vertexai/gemini-2.5-flash-preview-04-17",
+    "provider": "google",
+    "apiKeyName": "GOOGLE_API_KEY",
+    "modelType": "text",
+    "firebaseFunction": "callGenericLLM",
+    "contextWindow": 1000000,
+    "temperature": {
+      "min": 0,
+      "max": 2.0,
+      "default": 1.0,
+      "step": 0.1
+    },
+    "topK": {
+      "min": 0,
+      "max": 100,
+      "default": 40,
+      "step": 5
+    },
+    "topP": {
+      "min": 0,
+      "max": 1.0,
+      "default": 0.95,
+      "step": 0.05
+    },
+    "maxOutputTokens": {
+      "min": 1024,
+      "max": 64000,
+      "default": 8192,
+      "step": 1024
+    },
+    "extraParameters": [
+      {
+        "name": "thinking",
+        "type": "boolean",
+        "default": false,
+        "required": false,
+        "description": "Enable thinking mode"
+      },
+      {
+        "name": "thinkingBudget",
+        "type": "number",
+        "default": 1024,
+        "min": 1024,
+        "max": 24576,
+        "required": false,
+        "description": "Token budget for thinking when thinking is enabled",
+        "step": 1024
+      }
+    ]
+  },
+  {
+    "name": "Imagen-3",
+    "displayName": "Imagen 3",
+    "modelName": "imagen-3-generate-001",
+    "genkitName": "vertexai/imagen3",
+    "provider": "google",
+    "apiKeyName": "GOOGLE_API_KEY",
+    "modelType": "image",
+    "firebaseFunction": "callImageGeneration",
+    "contextWindow": 128000,
+    "temperature": {
+      "min": 0,
+      "max": 2.0,
+      "default": 1.0,
+      "step": 0.1
+    },
+    "topK": {
+      "min": 0,
+      "max": 100,
+      "default": 40,
+      "step": 5
+    },
+    "topP": {
+      "min": 0,
+      "max": 1.0,
+      "default": 0.95,
+      "step": 0.05
+    },
+    "maxOutputTokens": {
+      "min": 1024,
+      "max": 64000,
+      "default": 8192,
+      "step": 1024
+    },
+    "extraParameters": [
+      {
+        "name": "sampleCount",
+        "type": "number",
+        "default": 1,
+        "min": 1,
+        "max": 8,
+        "required": false,
+        "description": "Number of images to generate",
+        "step": 1
+      },
+      {
+        "name": "aspectRatio",
+        "type": "string",
+        "default": "1:1",
+        "options": ["1:1", "16:9", "9:16", "4:3", "3:4"],
+        "required": false,
+        "description": "Aspect ratio of generated images"
+      },
+      {
+        "name": "negativePrompt",
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "Elements to exclude from the generated image"
+      },
+      {
+        "name": "addWatermark",
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "Add SynthID watermark to image"
+      }
+    ]
+  },
+  {
+    "name": "Imagen-3-Fast",
+    "displayName": "Imagen 3 Fast",
+    "modelName": "imagen-3.0-fast-generate-001",
+    "genkitName": "vertexai/imagen3-fast",
+    "provider": "google",
+    "apiKeyName": "GOOGLE_API_KEY",
+    "modelType": "image",
+    "firebaseFunction": "callImageGeneration",
+    "contextWindow": 128000,
+    "temperature": {
+      "min": 0,
+      "max": 2.0,
+      "default": 1.0,
+      "step": 0.1
+    },
+    "topK": {
+      "min": 0,
+      "max": 100,
+      "default": 40,
+      "step": 5
+    },
+    "topP": {
+      "min": 0,
+      "max": 1.0,
+      "default": 0.95,
+      "step": 0.05
+    },
+    "maxOutputTokens": {
+      "min": 1024,
+      "max": 64000,
+      "default": 8192,
+      "step": 1024
+    },
+    "extraParameters": [
+      {
+        "name": "sampleCount",
+        "type": "number",
+        "default": 1,
+        "min": 1,
+        "max": 8,
+        "required": false,
+        "description": "Number of images to generate",
+        "step": 1
+      },
+      {
+        "name": "aspectRatio",
+        "type": "string",
+        "default": "1:1",
+        "options": ["1:1", "16:9", "9:16", "4:3", "3:4"],
+        "required": false,
+        "description": "Aspect ratio of generated images"
+      },
+      {
+        "name": "negativePrompt",
+        "type": "string",
+        "default": "",
+        "required": false,
+        "description": "Elements to exclude from the generated image"
+      },
+      {
+        "name": "addWatermark",
+        "type": "boolean",
+        "default": true,
+        "required": false,
+        "description": "Add SynthID watermark to image"
+      }
+    ]
+  }
+]
