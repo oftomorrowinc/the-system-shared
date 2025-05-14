@@ -54,6 +54,7 @@ exports.ProjectSchema = zod_1.z.object({
         allowAiAssistance: true,
         requireApprovals: false,
     }),
+    webhookUrl: zod_1.z.string().optional(),
     createdAt: zod_1.z.string().datetime(),
     updatedAt: zod_1.z.string().datetime(),
     deleted: zod_1.z.boolean().default(false),

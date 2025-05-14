@@ -151,6 +151,7 @@ export declare const ProjectSchema: z.ZodObject<{
         allowAiAssistance: boolean;
         requireApprovals?: boolean | undefined;
     }>>;
+    webhookUrl: z.ZodOptional<z.ZodString>;
     createdAt: z.ZodString;
     updatedAt: z.ZodString;
     deleted: z.ZodDefault<z.ZodBoolean>;
@@ -189,6 +190,7 @@ export declare const ProjectSchema: z.ZodObject<{
         messagesCount: number;
     };
     organizationId?: string | null | undefined;
+    webhookUrl?: string | undefined;
 }, {
     status: "not_started" | "in_progress" | "completed" | "failed" | "on_hold";
     name: string;
@@ -224,6 +226,7 @@ export declare const ProjectSchema: z.ZodObject<{
         requireApprovals?: boolean | undefined;
     } | undefined;
     organizationId?: string | null | undefined;
+    webhookUrl?: string | undefined;
 }>;
 export type Project = z.infer<typeof ProjectSchema>;
 export type ProjectMember = z.infer<typeof ProjectMemberSchema>;

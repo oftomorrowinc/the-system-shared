@@ -55,6 +55,7 @@ export const ProjectSchema = z.object({
     allowAiAssistance: true,
     requireApprovals: false,
   }),
+  webhookUrl: z.string().optional(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
   deleted: z.boolean().default(false),
