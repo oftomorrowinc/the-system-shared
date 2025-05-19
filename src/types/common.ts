@@ -23,7 +23,12 @@ export const convertTimestampToISOString = (val: unknown): string => {
   if (val instanceof Date) return val.toISOString();
 
   // Check for Firestore Timestamp with toDate method
-  if (typeof val === 'object' && val !== null && 'toDate' in val && typeof (val as TimestampLike).toDate === 'function') {
+  if (
+    typeof val === 'object' &&
+    val !== null &&
+    'toDate' in val &&
+    typeof (val as TimestampLike).toDate === 'function'
+  ) {
     try {
       const date = (val as TimestampLike).toDate?.();
       return date ? date.toISOString() : new Date().toISOString();
@@ -33,10 +38,17 @@ export const convertTimestampToISOString = (val: unknown): string => {
   }
 
   // Check for raw timestamp object with seconds
-  if (typeof val === 'object' && val !== null && 'seconds' in val && typeof (val as TimestampLike).seconds === 'number') {
+  if (
+    typeof val === 'object' &&
+    val !== null &&
+    'seconds' in val &&
+    typeof (val as TimestampLike).seconds === 'number'
+  ) {
     try {
       const seconds = (val as TimestampLike).seconds;
-      return seconds !== undefined ? new Date(seconds * 1000).toISOString() : new Date().toISOString();
+      return seconds !== undefined
+        ? new Date(seconds * 1000).toISOString()
+        : new Date().toISOString();
     } catch {
       return new Date().toISOString();
     }

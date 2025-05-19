@@ -33,11 +33,13 @@ export function buildSchema(schemas: Record<string, any>[]): Record<string, any>
   }
 
   // Step 0: Ensure each object has a single top-level property key in snake_case
-  schemas.forEach((schema) => {
+  schemas.forEach(schema => {
     const keys = Object.keys(schema);
 
     if (keys.length !== 1) {
-      throw new Error(`Schema must have exactly one top-level property, found ${keys.length}: ${keys.join(', ')}`);
+      throw new Error(
+        `Schema must have exactly one top-level property, found ${keys.length}: ${keys.join(', ')}`
+      );
     }
 
     const key = keys[0];
@@ -69,7 +71,7 @@ export function buildSchema(schemas: Record<string, any>[]): Record<string, any>
             const snakeCaseName = convertSchemaName(item);
 
             // Check if the referenced schema exists
-            if (!schemas.some((s) => Object.keys(s)[0] === snakeCaseName)) {
+            if (!schemas.some(s => Object.keys(s)[0] === snakeCaseName)) {
               throw new Error(`Referenced schema "${item}" (as ${snakeCaseName}) is missing`);
             }
 
@@ -86,7 +88,7 @@ export function buildSchema(schemas: Record<string, any>[]): Record<string, any>
             const snakeCaseName = convertSchemaName(value);
 
             // Check if the referenced schema exists
-            if (!schemas.some((s) => Object.keys(s)[0] === snakeCaseName)) {
+            if (!schemas.some(s => Object.keys(s)[0] === snakeCaseName)) {
               throw new Error(`Referenced schema "${value}" (as ${snakeCaseName}) is missing`);
             }
 
@@ -103,13 +105,17 @@ export function buildSchema(schemas: Record<string, any>[]): Record<string, any>
   }
 
   // Step 2: Check for circular dependencies
-  function checkCircularDependencies(schemaName: string, visited: Set<string> = new Set(), path: string[] = []): void {
+  function checkCircularDependencies(
+    schemaName: string,
+    visited: Set<string> = new Set(),
+    path: string[] = []
+  ): void {
     // If we've already visited this schema in this path, we have a circular dependency
     if (visited.has(schemaName)) {
       throw new Error(`Circular dependency detected: ${[...path, schemaName].join(' -> ')}`);
     }
 
-    const schema = schemas.find((s) => Object.keys(s)[0] === schemaName);
+    const schema = schemas.find(s => Object.keys(s)[0] === schemaName);
     if (!schema) return;
 
     const schemaContent = schema[schemaName];
@@ -125,7 +131,10 @@ export function buildSchema(schemas: Record<string, any>[]): Record<string, any>
         for (const item of obj) {
           if (typeof item === 'string') {
             // Check if it's a schema reference (should be snake_case at this point)
-            if (!['string', 'number', 'boolean'].includes(item) && schemas.some((s) => Object.keys(s)[0] === item)) {
+            if (
+              !['string', 'number', 'boolean'].includes(item) &&
+              schemas.some(s => Object.keys(s)[0] === item)
+            ) {
               // If the reference is to the current schema, it's a self-reference
               if (item === schemaName) {
                 throw new Error(`Self reference detected in schema "${schemaName}"`);
@@ -142,7 +151,10 @@ export function buildSchema(schemas: Record<string, any>[]): Record<string, any>
           // Changed to use Object.values to avoid unused 'key' variable
           if (typeof value === 'string') {
             // Check if it's a schema reference (should be snake_case at this point)
-            if (!['string', 'number', 'boolean'].includes(value) && schemas.some((s) => Object.keys(s)[0] === value)) {
+            if (
+              !['string', 'number', 'boolean'].includes(value) &&
+              schemas.some(s => Object.keys(s)[0] === value)
+            ) {
               // If the reference is to the current schema, it's a self-reference
               if (value === schemaName) {
                 throw new Error(`Self reference detected in schema "${schemaName}"`);
@@ -203,8 +215,13 @@ export function buildSchema(schemas: Record<string, any>[]): Record<string, any>
 
       obj.forEach((item, index) => {
         if (typeof item === 'string') {
-          if (!['string', 'number', 'boolean'].includes(item) && !schemas.some((s) => Object.keys(s)[0] === item)) {
-            throw new Error(`Invalid data type "${item}" at ${path.join('.')}.${index}, custom type not found in schemas`);
+          if (
+            !['string', 'number', 'boolean'].includes(item) &&
+            !schemas.some(s => Object.keys(s)[0] === item)
+          ) {
+            throw new Error(
+              `Invalid data type "${item}" at ${path.join('.')}.${index}, custom type not found in schemas`
+            );
           }
         } else if (typeof item === 'object' && item !== null) {
           validateDataTypes(item, [...path, index.toString()]);
@@ -213,8 +230,13 @@ export function buildSchema(schemas: Record<string, any>[]): Record<string, any>
     } else if (typeof obj === 'object' && obj !== null) {
       for (const [key, value] of Object.entries(obj)) {
         if (typeof value === 'string') {
-          if (!['string', 'number', 'boolean'].includes(value) && !schemas.some((s) => Object.keys(s)[0] === value)) {
-            throw new Error(`Invalid data type "${value}" at ${path.join('.')}.${key}, custom type not found in schemas`);
+          if (
+            !['string', 'number', 'boolean'].includes(value) &&
+            !schemas.some(s => Object.keys(s)[0] === value)
+          ) {
+            throw new Error(
+              `Invalid data type "${value}" at ${path.join('.')}.${key}, custom type not found in schemas`
+            );
           }
         } else if (Array.isArray(value)) {
           validateDataTypes(value, [...path, key]);
@@ -235,7 +257,11 @@ export function buildSchema(schemas: Record<string, any>[]): Record<string, any>
         const item = obj[0];
 
         // If the item is a string reference to another schema
-        if (typeof item === 'string' && !['string', 'number', 'boolean'].includes(item) && fullSchemaMap[item]) {
+        if (
+          typeof item === 'string' &&
+          !['string', 'number', 'boolean'].includes(item) &&
+          fullSchemaMap[item]
+        ) {
           // Create a new object with the referenced schema as its property
           const resolvedObj: Record<string, any> = {};
           resolvedObj[item] = resolveReferences(fullSchemaMap[item]);
@@ -246,7 +272,7 @@ export function buildSchema(schemas: Record<string, any>[]): Record<string, any>
       }
 
       // For other arrays, resolve each item
-      return obj.map((item) => resolveReferences(item));
+      return obj.map(item => resolveReferences(item));
     } else if (typeof obj === 'object' && obj !== null) {
       const resolved: Record<string, any> = {};
 
@@ -255,7 +281,11 @@ export function buildSchema(schemas: Record<string, any>[]): Record<string, any>
       }
 
       return resolved;
-    } else if (typeof obj === 'string' && !['string', 'number', 'boolean'].includes(obj) && fullSchemaMap[obj]) {
+    } else if (
+      typeof obj === 'string' &&
+      !['string', 'number', 'boolean'].includes(obj) &&
+      fullSchemaMap[obj]
+    ) {
       // If the value is a string reference to another schema
       return resolveReferences(fullSchemaMap[obj]);
     }
@@ -276,7 +306,9 @@ export function validateSchema(schema: Record<string, any>, data: any): any {
   // Check schema has a single top-level property in snake_case
   const schemaKeys = Object.keys(schema);
   if (schemaKeys.length !== 1) {
-    throw new Error(`Schema must have exactly one top-level property, found ${schemaKeys.length}: ${schemaKeys.join(', ')}`);
+    throw new Error(
+      `Schema must have exactly one top-level property, found ${schemaKeys.length}: ${schemaKeys.join(', ')}`
+    );
   }
 
   const schemaKey = schemaKeys[0];
@@ -325,7 +357,9 @@ export function validateSchema(schema: Record<string, any>, data: any): any {
         return dataValue;
       } else {
         // This is a custom type reference
-        throw new Error(`Custom type "${schemaValue}" found in schema at ${path.join('.')}. Schema validation only supports primitive types.`);
+        throw new Error(
+          `Custom type "${schemaValue}" found in schema at ${path.join('.')}. Schema validation only supports primitive types.`
+        );
       }
     }
     // If schema is an array
@@ -342,10 +376,14 @@ export function validateSchema(schema: Record<string, any>, data: any): any {
 
       // If the schema type is a custom type (string that's not a primitive type)
       if (typeof schemaType === 'string' && !['string', 'number', 'boolean'].includes(schemaType)) {
-        throw new Error(`Custom type "${schemaType}" found in schema array at ${path.join('.')}. Schema validation only supports primitive types.`);
+        throw new Error(
+          `Custom type "${schemaType}" found in schema array at ${path.join('.')}. Schema validation only supports primitive types.`
+        );
       }
 
-      return dataValue.map((item, index) => validateData(schemaType, item, [...path, index.toString()]));
+      return dataValue.map((item, index) =>
+        validateData(schemaType, item, [...path, index.toString()])
+      );
     }
     // If schema is an object
     else if (typeof schemaValue === 'object' && schemaValue !== null) {

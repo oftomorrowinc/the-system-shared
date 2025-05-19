@@ -10,7 +10,7 @@ import {
   toSnakeCase,
   toCamelCase,
   toPascalCase,
-  fromPascalCase
+  fromPascalCase,
 } from '../case-conversion';
 
 describe('Case Conversion - String Transformations', () => {
@@ -87,7 +87,7 @@ describe('Case Conversion - String Transformations', () => {
       // Apply the same transformation twice
       expect(camelToSnake(camelToSnake('helloWorld'))).toBe('hello_world');
       expect(snakeToCamel(snakeToCamel('hello_world'))).toBe('helloWorld');
-      
+
       // Apply the inverse transformation
       expect(snakeToCamel(camelToSnake('helloWorld'))).toBe('helloWorld');
       expect(camelToSnake(snakeToCamel('hello_world'))).toBe('hello_world');
@@ -108,24 +108,24 @@ describe('Case Conversion - Object Transformations', () => {
         isDarkMode: true,
         notificationSettings: {
           emailNotifications: true,
-          pushNotifications: false
-        }
-      }
+          pushNotifications: false,
+        },
+      },
     },
     addressList: [
       {
         streetAddress: '123 Main St',
-        cityName: 'Anytown'
+        cityName: 'Anytown',
       },
       {
         streetAddress: '456 Oak Ave',
-        cityName: 'Othertown'
-      }
+        cityName: 'Othertown',
+      },
     ],
     id: 'user-123',
     _meta: {
-      lastUpdated: 'yesterday'
-    }
+      lastUpdated: 'yesterday',
+    },
   };
 
   const snakeCaseObject = {
@@ -138,24 +138,24 @@ describe('Case Conversion - Object Transformations', () => {
         is_dark_mode: true,
         notification_settings: {
           email_notifications: true,
-          push_notifications: false
-        }
-      }
+          push_notifications: false,
+        },
+      },
     },
     address_list: [
       {
         street_address: '123 Main St',
-        city_name: 'Anytown'
+        city_name: 'Anytown',
       },
       {
         street_address: '456 Oak Ave',
-        city_name: 'Othertown'
-      }
+        city_name: 'Othertown',
+      },
     ],
     id: 'user-123',
     _meta: {
-      lastUpdated: 'yesterday'
-    }
+      lastUpdated: 'yesterday',
+    },
   };
 
   const pascalCaseObject = {
@@ -168,24 +168,24 @@ describe('Case Conversion - Object Transformations', () => {
         IsDarkMode: true,
         NotificationSettings: {
           EmailNotifications: true,
-          PushNotifications: false
-        }
-      }
+          PushNotifications: false,
+        },
+      },
     },
     AddressList: [
       {
         StreetAddress: '123 Main St',
-        CityName: 'Anytown'
+        CityName: 'Anytown',
       },
       {
         StreetAddress: '456 Oak Ave',
-        CityName: 'Othertown'
-      }
+        CityName: 'Othertown',
+      },
     ],
     id: 'user-123',
     _meta: {
-      lastUpdated: 'yesterday'
-    }
+      lastUpdated: 'yesterday',
+    },
   };
 
   test('toSnakeCase converts all object keys from camelCase to snake_case', () => {
@@ -218,21 +218,21 @@ describe('Case Conversion - Object Transformations', () => {
     const objWithNulls = {
       firstName: null,
       lastName: undefined,
-      userDetails: null
+      userDetails: null,
     };
 
     const snakeResult = toSnakeCase(objWithNulls);
     expect(snakeResult).toEqual({
       first_name: null,
       last_name: undefined,
-      user_details: null
+      user_details: null,
     });
 
     const pascalResult = toPascalCase(objWithNulls);
     expect(pascalResult).toEqual({
       FirstName: null,
       LastName: undefined,
-      UserDetails: null
+      UserDetails: null,
     });
   });
 
@@ -255,17 +255,17 @@ describe('Case Conversion - Object Transformations', () => {
   test('handles arrays at the top level', () => {
     const array = [
       { firstName: 'John', lastName: 'Doe' },
-      { firstName: 'Jane', lastName: 'Smith' }
+      { firstName: 'Jane', lastName: 'Smith' },
     ];
 
     const expectedSnakeArray = [
       { first_name: 'John', last_name: 'Doe' },
-      { first_name: 'Jane', last_name: 'Smith' }
+      { first_name: 'Jane', last_name: 'Smith' },
     ];
 
     const expectedPascalArray = [
       { FirstName: 'John', LastName: 'Doe' },
-      { FirstName: 'Jane', LastName: 'Smith' }
+      { FirstName: 'Jane', LastName: 'Smith' },
     ];
 
     expect(toSnakeCase(array)).toEqual(expectedSnakeArray);
@@ -310,8 +310,8 @@ describe('Case Conversion - Round Trip Tests', () => {
       firstName: 'John',
       lastName: 'Doe',
       userDetails: {
-        emailAddress: 'john.doe@example.com'
-      }
+        emailAddress: 'john.doe@example.com',
+      },
     };
 
     // Test multiple conversion paths

@@ -1,17 +1,17 @@
-import { buildSchema, validateSchema } from '../schema-helper';
-
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const schema_helper_1 = require('../schema-helper');
 describe('buildSchema', () => {
   test('builds a simple string schema', () => {
-    const result = buildSchema([{ data: 'string' }]);
+    const result = (0, schema_helper_1.buildSchema)([{ data: 'string' }]);
     expect(result).toEqual({ data: 'string' });
   });
-
   test('builds schema with array of custom types', () => {
     const schemas = [
       { beta_reader_reviews: ['BetaReaderReview'] },
       { beta_reader_review: 'string' },
     ];
-    const result = buildSchema(schemas);
+    const result = (0, schema_helper_1.buildSchema)(schemas);
     expect(result).toEqual({
       beta_reader_reviews: [
         {
@@ -20,7 +20,6 @@ describe('buildSchema', () => {
       ],
     });
   });
-
   test('builds complex nested schema', () => {
     const schemas = [
       {
@@ -33,7 +32,7 @@ describe('buildSchema', () => {
       },
       { beta_reader_review: 'string' },
     ];
-    const result = buildSchema(schemas);
+    const result = (0, schema_helper_1.buildSchema)(schemas);
     expect(result).toEqual({
       book: {
         title: 'string',
@@ -47,7 +46,6 @@ describe('buildSchema', () => {
       },
     });
   });
-
   test('builds schema with object properties', () => {
     const schemas = [
       {
@@ -57,7 +55,7 @@ describe('buildSchema', () => {
         },
       },
     ];
-    const result = buildSchema(schemas);
+    const result = (0, schema_helper_1.buildSchema)(schemas);
     expect(result).toEqual({
       user_profile: {
         age: 'number',
@@ -65,7 +63,6 @@ describe('buildSchema', () => {
       },
     });
   });
-
   test('builds schema with array reference', () => {
     const schemas = [
       { users: ['UserProfile'] },
@@ -76,7 +73,7 @@ describe('buildSchema', () => {
         },
       },
     ];
-    const result = buildSchema(schemas);
+    const result = (0, schema_helper_1.buildSchema)(schemas);
     expect(result).toEqual({
       users: [
         {
@@ -88,16 +85,14 @@ describe('buildSchema', () => {
       ],
     });
   });
-
   test('throws error for non-snake_case schema key', () => {
     expect(() => {
-      buildSchema([{ camelCase: 'string' }]);
+      (0, schema_helper_1.buildSchema)([{ camelCase: 'string' }]);
     }).toThrow(/must be in snake_case/);
   });
-
   test('throws error for missing referenced schema', () => {
     expect(() => {
-      buildSchema([
+      (0, schema_helper_1.buildSchema)([
         {
           book: {
             title: 'string',
@@ -107,10 +102,9 @@ describe('buildSchema', () => {
       ]);
     }).toThrow(/Referenced schema "BetaReaderReview" \(as beta_reader_review\)/);
   });
-
   test('throws error for circular dependency', () => {
     expect(() => {
-      buildSchema([
+      (0, schema_helper_1.buildSchema)([
         {
           circular_ref1: {
             // Changed from circular_ref_1 to match snake_case requirements
@@ -121,10 +115,9 @@ describe('buildSchema', () => {
       ]);
     }).toThrow(/Self reference detected/);
   });
-
   test('throws error for circular dependency between schemas', () => {
     expect(() => {
-      buildSchema([
+      (0, schema_helper_1.buildSchema)([
         {
           schema_a: {
             name: 'string',
@@ -140,49 +133,42 @@ describe('buildSchema', () => {
       ]);
     }).toThrow(/Circular dependency detected/);
   });
-
   test('throws error for non-array schema input', () => {
     expect(() => {
       // @ts-ignore
-      buildSchema('not an array');
+      (0, schema_helper_1.buildSchema)('not an array');
     }).toThrow(/Schema must be an array/);
   });
-
   test('throws error for empty schema array', () => {
     expect(() => {
-      buildSchema([]);
+      (0, schema_helper_1.buildSchema)([]);
     }).toThrow(/Schema must be an array of at least one object/);
   });
-
   test('throws error for schema with multiple top-level keys', () => {
     expect(() => {
-      buildSchema([{ key1: 'string', key2: 'number' }]);
+      (0, schema_helper_1.buildSchema)([{ key1: 'string', key2: 'number' }]);
     }).toThrow(/Schema must have exactly one top-level property/);
   });
 });
-
 describe('validateSchema', () => {
   test('validates a simple string schema', () => {
     const schema = { data: 'string' };
     const data = { data: 'test value' };
-    const result = validateSchema(schema, data);
+    const result = (0, schema_helper_1.validateSchema)(schema, data);
     expect(result).toEqual(data);
   });
-
   test('validates and converts a number schema', () => {
     const schema = { age: 'number' };
     const data = { age: '25' };
-    const result = validateSchema(schema, data);
+    const result = (0, schema_helper_1.validateSchema)(schema, data);
     expect(result).toEqual({ age: 25 });
   });
-
   test('validates and converts a boolean schema', () => {
     const schema = { is_active: 'boolean' };
     const data = { is_active: 'true' };
-    const result = validateSchema(schema, data);
+    const result = (0, schema_helper_1.validateSchema)(schema, data);
     expect(result).toEqual({ is_active: true });
   });
-
   test('validates an object schema', () => {
     const schema = {
       user_profile: {
@@ -198,7 +184,7 @@ describe('validateSchema', () => {
         name: 'John Doe',
       },
     };
-    const result = validateSchema(schema, data);
+    const result = (0, schema_helper_1.validateSchema)(schema, data);
     expect(result).toEqual({
       user_profile: {
         age: 30,
@@ -207,74 +193,65 @@ describe('validateSchema', () => {
       },
     });
   });
-
   test('validates an array schema', () => {
     const schema = { tags: ['string'] };
     const data = { tags: ['javascript', 'typescript', 'nodejs'] };
-    const result = validateSchema(schema, data);
+    const result = (0, schema_helper_1.validateSchema)(schema, data);
     expect(result).toEqual(data);
   });
-
   test('validates an array with primitive types', () => {
     const schema = { scores: ['number'] };
     const data = { scores: ['85', '92', '78'] };
-    const result = validateSchema(schema, data);
+    const result = (0, schema_helper_1.validateSchema)(schema, data);
     expect(result).toEqual({ scores: [85, 92, 78] });
   });
-
   test('throws error for custom type in schema', () => {
     const schema = { book: { reviews: ['Review'] } };
     const data = { book: { reviews: [{ text: 'Good book' }] } };
     expect(() => {
-      validateSchema(schema, data);
+      (0, schema_helper_1.validateSchema)(schema, data);
     }).toThrow(/Custom type "Review" found in schema/);
   });
-
   test('throws error for invalid number conversion', () => {
     const schema = { age: 'number' };
     const data = { age: 'not a number' };
     expect(() => {
-      validateSchema(schema, data);
+      (0, schema_helper_1.validateSchema)(schema, data);
     }).toThrow(/Cannot convert string "not a number" to number/);
   });
-
   test('throws error for invalid boolean conversion', () => {
     const schema = { is_active: 'boolean' };
     const data = { is_active: 'maybe' };
     expect(() => {
-      validateSchema(schema, data);
+      (0, schema_helper_1.validateSchema)(schema, data);
     }).toThrow(/Cannot convert string "maybe" to boolean/);
   });
-
   test('throws error for missing property', () => {
     const schema = { user: { name: 'string', age: 'number' } };
     const data = { user: { name: 'John' } };
     expect(() => {
-      validateSchema(schema, data);
+      (0, schema_helper_1.validateSchema)(schema, data);
     }).toThrow(/Missing required property "age"/);
   });
-
   test('throws error for mismatched top-level property', () => {
     const schema = { user: { name: 'string' } };
     const data = { profile: { name: 'John' } };
     expect(() => {
-      validateSchema(schema, data);
+      (0, schema_helper_1.validateSchema)(schema, data);
     }).toThrow(/Data must have exactly one top-level property matching schema/);
   });
-
   test('throws error for type mismatch', () => {
     const schema = { data: 'string' };
     const data = { data: 123 };
     expect(() => {
-      validateSchema(schema, data);
+      (0, schema_helper_1.validateSchema)(schema, data);
     }).toThrow(/Expected string at data, got number/);
   });
-
   test('throws error for non-snake_case schema key', () => {
     const schema = { userProfile: { name: 'string' } };
     const data = { userProfile: { name: 'John' } };
     expect(() => {
-      validateSchema(schema, data);
+      (0, schema_helper_1.validateSchema)(schema, data);
     }).toThrow(/Schema key "userProfile" must be in snake_case/);
   });
 });

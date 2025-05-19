@@ -64,7 +64,7 @@ export const isTodoNeedsApproval = (todo: Todo): boolean => {
 };
 
 export const getTodoStatusCounts = (
-  todos: Todo[],
+  todos: Todo[]
 ): {
   total: number;
   pending: number;
@@ -76,11 +76,11 @@ export const getTodoStatusCounts = (
 } => {
   return {
     total: todos.length,
-    pending: todos.filter((todo) => todo.status === 'pending').length,
-    inProgress: todos.filter((todo) => todo.status === 'in_progress').length,
-    completed: todos.filter((todo) => todo.status === 'completed').length,
-    approved: todos.filter((todo) => todo.status === 'approved').length,
-    blocked: todos.filter((todo) => todo.status === 'blocked').length,
-    needsApproval: todos.filter((todo) => todo.status === 'completed' && todo.needsApproval).length,
+    pending: todos.filter(todo => todo.status === 'pending').length,
+    inProgress: todos.filter(todo => todo.status === 'in_progress').length,
+    completed: todos.filter(todo => todo.status === 'completed').length,
+    approved: todos.filter(todo => todo.status === 'approved').length,
+    blocked: todos.filter(todo => todo.status === 'blocked').length,
+    needsApproval: todos.filter(todo => todo.status === 'completed' && todo.needsApproval).length,
   };
 };

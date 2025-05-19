@@ -2,7 +2,13 @@
 import { z } from 'zod';
 
 // Project member status
-export const ProjectMemberStatusSchema = z.enum(['invited', 'active', 'removed', 'left', 'declined']);
+export const ProjectMemberStatusSchema = z.enum([
+  'invited',
+  'active',
+  'removed',
+  'left',
+  'declined',
+]);
 
 // Project member schema
 export const ProjectMemberSchema = z.object({

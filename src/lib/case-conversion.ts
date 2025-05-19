@@ -9,11 +9,12 @@ interface JsonObject {
 type JsonArray = JsonValue[];
 
 // Type for conversion result - maintains the shape of the input
-type ConversionResult<T> = T extends Array<infer U>
-  ? Array<ConversionResult<U>>
-  : T extends object
-  ? { [K: string]: JsonValue }
-  : T;
+type ConversionResult<T> =
+  T extends Array<infer U>
+    ? Array<ConversionResult<U>>
+    : T extends object
+      ? { [K: string]: JsonValue }
+      : T;
 
 /**
  * Converts a camelCase string to snake_case
@@ -24,10 +25,10 @@ export function camelToSnake(str: string): string {
   // Handle consecutive uppercase letters (e.g., "API" in "APIKey")
   // Convert patterns like "APIKey" to "Api_key" first
   let result = str.replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2');
-  
+
   // Handle regular camelCase conversion
   result = result.replace(/([a-z0-9])([A-Z])/g, '$1_$2');
-  
+
   // Convert to lowercase
   return result.toLowerCase();
 }
@@ -74,10 +75,10 @@ export function snakeToPascal(str: string): string {
  */
 export function pascalToSnake(str: string): string {
   if (!str) return str;
-  
+
   // First character to lowercase
   const result = str.charAt(0).toLowerCase() + str.slice(1);
-  
+
   // Then apply the same logic as camelToSnake
   return camelToSnake(result);
 }
@@ -92,7 +93,7 @@ export function toSnakeCase<T>(obj: T): ConversionResult<T> {
   }
 
   if (Array.isArray(obj)) {
-    return obj.map((item) => toSnakeCase(item)) as ConversionResult<T>;
+    return obj.map(item => toSnakeCase(item)) as ConversionResult<T>;
   }
 
   return Object.entries(obj as JsonObject).reduce(
@@ -115,7 +116,7 @@ export function toSnakeCase<T>(obj: T): ConversionResult<T> {
 
       return result;
     },
-    {} as Record<string, JsonValue>,
+    {} as Record<string, JsonValue>
   ) as ConversionResult<T>;
 }
 
@@ -129,7 +130,7 @@ export function toCamelCase<T>(obj: T): ConversionResult<T> {
   }
 
   if (Array.isArray(obj)) {
-    return obj.map((item) => toCamelCase(item)) as ConversionResult<T>;
+    return obj.map(item => toCamelCase(item)) as ConversionResult<T>;
   }
 
   return Object.entries(obj as JsonObject).reduce(
@@ -152,7 +153,7 @@ export function toCamelCase<T>(obj: T): ConversionResult<T> {
 
       return result;
     },
-    {} as Record<string, JsonValue>,
+    {} as Record<string, JsonValue>
   ) as ConversionResult<T>;
 }
 
@@ -166,7 +167,7 @@ export function toPascalCase<T>(obj: T): ConversionResult<T> {
   }
 
   if (Array.isArray(obj)) {
-    return obj.map((item) => toPascalCase(item)) as ConversionResult<T>;
+    return obj.map(item => toPascalCase(item)) as ConversionResult<T>;
   }
 
   return Object.entries(obj as JsonObject).reduce(
@@ -189,7 +190,7 @@ export function toPascalCase<T>(obj: T): ConversionResult<T> {
 
       return result;
     },
-    {} as Record<string, JsonValue>,
+    {} as Record<string, JsonValue>
   ) as ConversionResult<T>;
 }
 
@@ -203,7 +204,7 @@ export function fromPascalCase<T>(obj: T): ConversionResult<T> {
   }
 
   if (Array.isArray(obj)) {
-    return obj.map((item) => fromPascalCase(item)) as ConversionResult<T>;
+    return obj.map(item => fromPascalCase(item)) as ConversionResult<T>;
   }
 
   return Object.entries(obj as JsonObject).reduce(
@@ -226,6 +227,6 @@ export function fromPascalCase<T>(obj: T): ConversionResult<T> {
 
       return result;
     },
-    {} as Record<string, JsonValue>,
+    {} as Record<string, JsonValue>
   ) as ConversionResult<T>;
 }

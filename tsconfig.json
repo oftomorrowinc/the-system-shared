@@ -12,14 +12,12 @@
     "rootDir": "src",
     "types": ["jest", "node"],
     "resolveJsonModule": true,
+    "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
   "include": ["src/**/*.ts"],
-  "exclude": [
-      "node_modules",
-      "dist"
-  ]
+  "exclude": ["node_modules", "dist"]
 }

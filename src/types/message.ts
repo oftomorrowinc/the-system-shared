@@ -3,7 +3,13 @@ import { z } from 'zod';
 import { convertTimestampToISOString } from './common';
 
 // Message types
-export const MessageTypeSchema = z.enum(['text', 'file', 'status_update', 'member_update', 'system']);
+export const MessageTypeSchema = z.enum([
+  'text',
+  'file',
+  'status_update',
+  'member_update',
+  'system',
+]);
 
 export const MessageSchema = z.object({
   id: z.string().optional(),
@@ -16,8 +22,8 @@ export const MessageSchema = z.object({
   type: MessageTypeSchema,
   aiMessage: z.boolean(),
   metadata: z.record(z.string(), z.any()).optional(),
-  createdAt: z.preprocess((val) => convertTimestampToISOString(val), z.string().datetime()),
-  updatedAt: z.preprocess((val) => convertTimestampToISOString(val), z.string().datetime()),
+  createdAt: z.preprocess(val => convertTimestampToISOString(val), z.string().datetime()),
+  updatedAt: z.preprocess(val => convertTimestampToISOString(val), z.string().datetime()),
   deleted: z.boolean().default(false),
 });
 
@@ -32,7 +38,7 @@ export const createMessage = (
     todoId?: string | null;
     aiMessage?: boolean;
     metadata?: Record<string, unknown>;
-  } = {},
+  } = {}
 ): Omit<Message, 'id'> => {
   const now = new Date().toISOString();
 

@@ -16,8 +16,8 @@ export const DocumentSchema = z.object({
   todoId: z.string().nullable(),
   userId: z.string().nullable(),
   taskId: z.string().nullable(),
-  createdAt: z.preprocess((val) => convertTimestampToISOString(val), z.string().datetime()),
-  updatedAt: z.preprocess((val) => convertTimestampToISOString(val), z.string().datetime()),
+  createdAt: z.preprocess(val => convertTimestampToISOString(val), z.string().datetime()),
+  updatedAt: z.preprocess(val => convertTimestampToISOString(val), z.string().datetime()),
   deleted: z.boolean().default(false),
 });
 
@@ -46,7 +46,7 @@ export const createDocument = (
     todoId?: string | null;
     userId?: string | null;
     taskId?: string | null;
-  } = {},
+  } = {}
 ): Omit<Document, 'id'> => {
   const now = new Date().toISOString();
 

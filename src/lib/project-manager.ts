@@ -43,7 +43,7 @@ export function getProjectRoles(todos: Todo[]): string[] {
 
   const roles = new Set<string>();
 
-  todos.forEach((todo) => {
+  todos.forEach(todo => {
     if (todo && typeof todo === 'object') {
       if (typeof todo.taskRole === 'string' && todo.taskRole.trim()) {
         roles.add(todo.taskRole);
