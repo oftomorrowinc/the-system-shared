@@ -11,7 +11,7 @@ export const TaskSchema = z.object({
   description: z.string(),
   successCriteria: z.array(z.string()),
   processSteps: z.array(z.string()),
-  inputSchemaId: z.string(),
+  inputSchemaIds: z.array(z.string()),
   outputSchemaId: z.string(),
   tools: z.array(z.string()).default([]),
   subTasks: z.array(z.string()).default([]),

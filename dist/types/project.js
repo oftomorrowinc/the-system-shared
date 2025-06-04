@@ -19,7 +19,6 @@ exports.ProjectMemberStatusSchema = zod_1.z.enum([
 ]);
 // Project member schema
 exports.ProjectMemberSchema = zod_1.z.object({
-  roles: zod_1.z.array(zod_1.z.string()),
   status: exports.ProjectMemberStatusSchema.default('active'),
 });
 // Project settings schema

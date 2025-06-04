@@ -15,7 +15,6 @@ export const WorkflowSchema = z.object({
   visibility: z.enum(['public', 'private']),
   organizationId: z.string().nullable().optional(),
   version: z.number().default(1),
-  requiredRoles: z.array(z.string()).default([]),
   steps: z.array(WorkflowStepSchema),
   metrics: MetricsSchema,
   createdAt: z.string().datetime(),

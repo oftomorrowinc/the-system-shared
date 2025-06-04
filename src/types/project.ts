@@ -12,7 +12,6 @@ export const ProjectMemberStatusSchema = z.enum([
 
 // Project member schema
 export const ProjectMemberSchema = z.object({
-  roles: z.array(z.string()),
   status: ProjectMemberStatusSchema.default('active'),
 });
 

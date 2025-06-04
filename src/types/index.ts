@@ -5,7 +5,6 @@ export * from './document';
 export * from './message';
 export * from './organization';
 export * from './project';
-export * from './role';
 export * from './schema';
 export * from './task';
 export * from './todo';

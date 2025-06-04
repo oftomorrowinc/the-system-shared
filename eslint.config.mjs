@@ -13,7 +13,8 @@ export default [
       "**/coverage/**/*",
       "**/.next/**/*",
       "**/out/**/*",
-      "**/public/**/*"
+      "**/public/**/*",
+      "**/migrations/**/*"
     ]
   },
   

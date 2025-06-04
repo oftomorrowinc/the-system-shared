@@ -14,8 +14,6 @@ export const UserSchema = z.object({
   organizationId: z.string().nullable().optional(),
   isSystemAdmin: z.boolean().default(false),
   isAi: z.boolean().default(false),
-  availableRoles: z.array(z.string()),
-  preferredRoles: z.array(z.string()),
   metrics: z.object({
     tasksCompleted: z.number().int().min(0),
     successRate: z.number().min(0).max(1),
