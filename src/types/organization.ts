@@ -23,6 +23,8 @@ export const OrganizationSchema = z.object({
   id: z.string(),
   name: z.string().min(1, 'Organization name is required'),
   description: z.string().optional(),
+  availableTokens: z.number().int().min(0).default(0),
+  totalSpent: z.number().min(0).default(0),
   logoUrl: z
     .union([
       z.string().url(), // Valid URL

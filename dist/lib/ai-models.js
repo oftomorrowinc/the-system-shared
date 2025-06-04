@@ -12,6 +12,8 @@ exports.AI_MODELS = [
     modelType: 'text',
     firebaseFunction: 'callGenericLLM',
     contextWindow: 1047576,
+    inputCost: 0.000002,
+    outputCost: 0.000008,
     temperature: {
       min: 0,
       max: 2.0,
@@ -47,6 +49,8 @@ exports.AI_MODELS = [
     modelType: 'text',
     firebaseFunction: 'callGenericLLM',
     contextWindow: 1047576,
+    inputCost: 0.0000004,
+    outputCost: 0.0000016,
     temperature: {
       min: 0,
       max: 2.0,
@@ -82,6 +86,8 @@ exports.AI_MODELS = [
     modelType: 'text',
     firebaseFunction: 'callGenericLLM',
     contextWindow: 200000,
+    inputCost: 0.000003,
+    outputCost: 0.000015,
     temperature: {
       min: 0,
       max: 1.0,
@@ -136,6 +142,8 @@ exports.AI_MODELS = [
     modelType: 'text',
     firebaseFunction: 'callGenericLLM',
     contextWindow: 200000,
+    inputCost: 0.0000008,
+    outputCost: 0.000004,
     temperature: {
       min: 0,
       max: 1.0,
@@ -171,6 +179,8 @@ exports.AI_MODELS = [
     modelType: 'text',
     firebaseFunction: 'callGenericLLM',
     contextWindow: 1000000,
+    inputCost: 0.00000125,
+    outputCost: 0.00001,
     temperature: {
       min: 0,
       max: 2.0,
@@ -225,6 +235,8 @@ exports.AI_MODELS = [
     modelType: 'text',
     firebaseFunction: 'callGenericLLM',
     contextWindow: 1000000,
+    inputCost: 0.00000015,
+    outputCost: 0.0000006,
     temperature: {
       min: 0,
       max: 2.0,
@@ -279,6 +291,8 @@ exports.AI_MODELS = [
     modelType: 'image',
     firebaseFunction: 'callImageGeneration',
     contextWindow: 128000,
+    inputCost: 0,
+    outputCost: 0.04,
     temperature: {
       min: 0,
       max: 2.0,
@@ -348,6 +362,8 @@ exports.AI_MODELS = [
     modelType: 'image',
     firebaseFunction: 'callImageGeneration',
     contextWindow: 128000,
+    inputCost: 0,
+    outputCost: 0.02,
     temperature: {
       min: 0,
       max: 2.0,
