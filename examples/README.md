@@ -28,22 +28,22 @@ You can run the examples directly using npm scripts:
 
 ```
 # From the project root directory:
-npm run example:streaming     # Run the streaming example
-npm run example:non-streaming # Run the non-streaming example
+npm run example:api-streaming     # Run the streaming example
+npm run example:api-non-streaming # Run the non-streaming example
 ```
 
 Or directly with Node:
 
 ```
-node examples/streaming-example.js
-node examples/non-streaming-example.js
+node examples/api-streaming-example.js
+node examples/api-non-streaming-example.js
 ```
 
 ## Examples
 
 ### Non-Streaming Example with Webhooks
 
-The [non-streaming-example.js](./non-streaming-example.js) demonstrates:
+The [api-non-streaming-example.js](./api-non-streaming-example.js) demonstrates:
 
 - Setting up a webhook server to receive project updates
 - Creating a project with the PingPong workflow
@@ -56,7 +56,7 @@ This example uses our simplified API that handles webhook server setup and event
 
 ### Streaming Example
 
-The [streaming-example.js](./streaming-example.js) demonstrates:
+The [api-streaming-example.js](./api-streaming-example.js) demonstrates:
 
 - Creating a project with streaming enabled
 - Processing real-time updates as they arrive

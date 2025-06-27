@@ -20,8 +20,8 @@
     "tscheck": "tsc --noEmit",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
     "prettier:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx}\"",
-    "example:streaming": "node examples/streaming-example.js",
-    "example:non-streaming": "node examples/non-streaming-example.js",
+    "example:api-streaming": "node examples/api-streaming-example.js",
+    "example:api-non-streaming": "node examples/api-non-streaming-example.js",
     "prepare": "husky",
     "pre-commit": "lint-staged"
   },
