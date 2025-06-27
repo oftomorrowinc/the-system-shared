@@ -44,6 +44,7 @@ The pre-commit hooks will automatically run linting and formatting on your stage
 ## Releasing a new package version
 
 - Increment the version number in package.json as appropriate
+- ALSO update the package.json release script to match the version number (needed for Windows)
 - Run `npm run build` to ensure there are no errors
 - Run `npm run release`
 - Go to the project page on Github, go to releases, click draft a new release, select your tag, add a title/description and click publish

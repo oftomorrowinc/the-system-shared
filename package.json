@@ -13,7 +13,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsc -p tsconfig.json --watch",
-    "release": "npm run build && git add . && git commit -m \"Release v1.3.1\" && git tag -a v1.3.1 -m \"Release v1.3.1\" && git push && git push --tags",
+    "release": "npm run build && git add . && git commit -m \"Release v1.3.2\" && git tag -a v1.3.2 -m \"Release v1.3.2\" && git push && git push --tags",
     "test": "jest --config jest.config.js",
     "test:watch": "jest --config jest.config.js --watch",
     "lint": "eslint --ext .ts,.tsx .",
