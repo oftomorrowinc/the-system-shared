@@ -1,22 +1,27 @@
-// Example of using the API client with webhooks
+// Example of using the API client with webhooks and custom steps workflow
 // This example:
 // 1. Sets up a webhook server to receive project updates
-// 2. Creates a project with the PingPong workflow
+// 2. Creates a project with custom steps instead of a predefined workflow
 // 3. Receives webhook notifications when the project completes
 // 4. Fetches the final results automatically when completed
 
 // Import the shared SDK
-const { ApiClient, WebhookEventType } = require('../dist');
+const { ApiClient } = require('../dist');
 const config = require('./config');
 
 // Generate a timestamp for unique project names
 const timestamp = Date.now();
 
-// Sample project data using the PingPong workflow
+// Sample project data using custom steps with the Ping task
 const projectData = {
-  name: `PingPong Test ${timestamp}`, // Add timestamp for unique project names
-  workflowId: 'sJIQqPRhULhyvZguFLzK', // PingPong workflow ID
-  workflowVersion: 1,
+  name: `Ping Test with Steps ${timestamp}`, // Add timestamp for unique project names
+  workflowVersion: 1, // Required version for steps workflow
+  steps: [
+    {
+      taskId: 'iM24q2F3igh8jG2Bb4nJ', // Ping task ID
+      indentLevel: 0, // Root level
+    },
+  ],
   organizationId: 'org-123',
   owners: ['user-123'],
   inputValues: [
@@ -30,7 +35,7 @@ const projectData = {
 
 async function runExample() {
   try {
-    console.log('Setting up webhook server and creating project...');
+    console.log('Setting up webhook server and creating project with custom steps...');
 
     // Create an API client with configuration
     const apiClient = new ApiClient({
@@ -115,6 +120,7 @@ async function runExample() {
     console.log('1. Check your .env file for correct API_KEY and API_BASE_URL');
     console.log('2. Make sure ngrok is running and the URL in .env is current');
     console.log('3. See WEBHOOK-QUICKSTART.md for detailed setup instructions');
+    console.log('4. Ensure the specified taskId exists and is accessible');
   }
 }
 

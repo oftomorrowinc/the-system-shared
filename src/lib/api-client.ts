@@ -1,6 +1,5 @@
 // shared/lib/api-client.ts
 import { z } from 'zod';
-import { Project, ProjectSchema } from '../types/project';
 import {
   WebhookHandler,
   WebhookServerOptions,
@@ -37,14 +36,35 @@ export type ApiClientConfig = z.infer<typeof ApiClientConfigSchema>;
 export const ProjectRequestSchema = z
   .object({
     name: z.string(),
-    workflowId: z.string(),
-    workflowVersion: z.number(),
+    workflowId: z.string().optional(),
+    workflowVersion: z.number().optional(),
+    steps: z
+      .array(
+        z.object({
+          taskId: z.string(),
+          indentLevel: z.number().default(0),
+        })
+      )
+      .optional(),
     organizationId: z.string(),
     owners: z.array(z.string()),
-    inputValue: z.record(z.string(), z.any()),
+    inputValues: z.array(z.record(z.string(), z.any())),
     useStream: z.boolean().optional(),
     webhookUrl: z.union([z.string().url(), z.literal('')]).optional(),
   })
+  .refine(
+    data => {
+      // Either workflowId/workflowVersion OR steps must be provided, but not both
+      const hasWorkflow = data.workflowId && data.workflowVersion !== undefined;
+      const hasSteps = data.steps && data.steps.length > 0;
+
+      return (hasWorkflow && !hasSteps) || (!hasWorkflow && hasSteps);
+    },
+    {
+      message:
+        'Either workflowId and workflowVersion must be provided, or steps must be provided, but not both',
+    }
+  )
   .transform(data => {
     // Create a shallow copy of the data
     const result = { ...data };
@@ -178,7 +198,7 @@ export class ApiClient {
               try {
                 const data = JSON.parse(part);
                 onStreamData(data);
-              } catch (jsonError) {
+              } catch {
                 // If not valid JSON, pass the raw string
                 onStreamData({ text: part, type: 'raw' });
               }

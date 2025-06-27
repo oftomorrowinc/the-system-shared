@@ -143,9 +143,11 @@ const { projectId, webhookUrl, stop } = await apiClient.createProjectWithWebhook
     workflowVersion: 1,
     organizationId: 'org-id',
     owners: ['user-id'],
-    inputValue: {
-      // Your project input
-    },
+    inputValues: [
+      {
+        // Your project input
+      },
+    ],
   },
 
   // Webhook server configuration

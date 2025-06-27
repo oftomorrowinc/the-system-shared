@@ -1,6 +1,6 @@
 {
   "name": "the-system-shared",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -21,6 +21,8 @@
     "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
     "prettier:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx}\"",
     "example:api-streaming": "node examples/api-streaming-example.js",
+    "example:api-streaming-with-steps": "node examples/api-streaming-example-with-steps.js",
+    "example:api-non-streaming-with-steps": "node examples/api-non-streaming-example-with-steps.js",
     "example:api-non-streaming": "node examples/api-non-streaming-example.js",
     "prepare": "husky",
     "pre-commit": "lint-staged"

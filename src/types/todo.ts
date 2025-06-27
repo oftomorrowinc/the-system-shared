@@ -15,7 +15,7 @@ export const TodoSchema = z.object({
   status: z.enum(['pending', 'in_progress', 'completed', 'blocked', 'approved', 'rejected']),
   assignedTo: z.array(z.string()).default([]),
   needsApproval: z.boolean().default(false),
-  inputValues: z.record(z.string(), z.any()).optional(),
+  inputValues: z.array(z.record(z.string(), z.any())).optional(),
   outputValues: z.record(z.string(), z.any()).optional(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),

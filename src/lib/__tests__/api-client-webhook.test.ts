@@ -59,7 +59,7 @@ describe('ApiClient webhook integration', () => {
         workflowVersion: 1,
         organizationId: 'test-org',
         owners: ['test-user'],
-        inputValue: { test: 'data' },
+        inputValues: [{ test: 'data' }],
       };
 
       // Create client with a webhook URL
@@ -86,7 +86,7 @@ describe('ApiClient webhook integration', () => {
         workflowVersion: 1,
         organizationId: 'test-org',
         owners: ['test-user'],
-        inputValue: { test: 'data' },
+        inputValues: [{ test: 'data' }],
         webhookUrl: 'https://explicit-webhook.example.com/path',
       };
 
@@ -114,7 +114,7 @@ describe('ApiClient webhook integration', () => {
         workflowVersion: 1,
         organizationId: 'test-org',
         owners: ['test-user'],
-        inputValue: { test: 'data' },
+        inputValues: [{ test: 'data' }],
         webhookUrl: '', // Explicitly empty
       };
 
@@ -138,7 +138,7 @@ describe('ApiClient webhook integration', () => {
         workflowVersion: 1,
         organizationId: 'test-org',
         owners: ['test-user'],
-        inputValue: { test: 'data' },
+        inputValues: [{ test: 'data' }],
       };
 
       const result = await apiClient.createProjectWithWebhook({
@@ -180,7 +180,7 @@ describe('ApiClient webhook integration', () => {
         workflowVersion: 1,
         organizationId: 'test-org',
         owners: ['test-user'],
-        inputValue: { test: 'data' },
+        inputValues: [{ test: 'data' }],
       };
 
       const handlers = {
@@ -220,7 +220,7 @@ describe('ApiClient webhook integration', () => {
         workflowVersion: 1,
         organizationId: 'test-org',
         owners: ['test-user'],
-        inputValue: { test: 'data' },
+        inputValues: [{ test: 'data' }],
       };
 
       const result = await apiClient.createProjectWithWebhook({
@@ -255,7 +255,7 @@ describe('ApiClient webhook integration', () => {
         workflowVersion: 1,
         organizationId: 'test-org',
         owners: ['test-user'],
-        inputValue: { test: 'data' },
+        inputValues: [{ test: 'data' }],
       };
 
       const result = await apiClient.createProjectWithWebhook({

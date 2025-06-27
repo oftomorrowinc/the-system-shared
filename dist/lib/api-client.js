@@ -28,14 +28,34 @@ exports.ApiClientConfigSchema = zod_1.z
 exports.ProjectRequestSchema = zod_1.z
   .object({
     name: zod_1.z.string(),
-    workflowId: zod_1.z.string(),
-    workflowVersion: zod_1.z.number(),
+    workflowId: zod_1.z.string().optional(),
+    workflowVersion: zod_1.z.number().optional(),
+    steps: zod_1.z
+      .array(
+        zod_1.z.object({
+          taskId: zod_1.z.string(),
+          indentLevel: zod_1.z.number().default(0),
+        })
+      )
+      .optional(),
     organizationId: zod_1.z.string(),
     owners: zod_1.z.array(zod_1.z.string()),
-    inputValue: zod_1.z.record(zod_1.z.string(), zod_1.z.any()),
+    inputValues: zod_1.z.array(zod_1.z.record(zod_1.z.string(), zod_1.z.any())),
     useStream: zod_1.z.boolean().optional(),
     webhookUrl: zod_1.z.union([zod_1.z.string().url(), zod_1.z.literal('')]).optional(),
   })
+  .refine(
+    data => {
+      // Either workflowId/workflowVersion OR steps must be provided, but not both
+      const hasWorkflow = data.workflowId && data.workflowVersion !== undefined;
+      const hasSteps = data.steps && data.steps.length > 0;
+      return (hasWorkflow && !hasSteps) || (!hasWorkflow && hasSteps);
+    },
+    {
+      message:
+        'Either workflowId and workflowVersion must be provided, or steps must be provided, but not both',
+    }
+  )
   .transform(data => {
     // Create a shallow copy of the data
     const result = { ...data };
@@ -103,7 +123,7 @@ class ApiClient {
               try {
                 const data = JSON.parse(part);
                 onStreamData(data);
-              } catch (jsonError) {
+              } catch {
                 // If not valid JSON, pass the raw string
                 onStreamData({ text: part, type: 'raw' });
               }

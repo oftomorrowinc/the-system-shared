@@ -1,6 +1,6 @@
-// Example of using the API client with streaming
+// Example of using the API client with streaming and custom steps workflow
 // This example:
-// 1. Creates a project with the PingPong workflow with streaming enabled
+// 1. Creates a project with custom steps instead of a predefined workflow with streaming enabled
 // 2. Processes stream data events as they arrive
 
 // Import the shared SDK and load environment variables
@@ -10,11 +10,16 @@ const config = require('./config');
 // Generate a timestamp for unique project names
 const timestamp = Date.now();
 
-// Sample project data using the PingPong workflow
+// Sample project data using custom steps with the Ping task
 const projectData = {
-  name: `PingPong Test (Streaming) ${timestamp}`,
-  workflowId: 'sJIQqPRhULhyvZguFLzK', // PingPong workflow ID
-  workflowVersion: 1,
+  name: `Ping Test with Steps (Streaming) ${timestamp}`,
+  workflowVersion: 1, // Required version for steps workflow
+  steps: [
+    {
+      taskId: 'iM24q2F3igh8jG2Bb4nJ', // Ping task ID
+      indentLevel: 0, // Root level
+    },
+  ],
   organizationId: 'org-123',
   owners: ['user-123'],
   inputValues: [
@@ -46,7 +51,7 @@ async function runExample() {
       webhookUrl: config.get('WEBHOOK_URL'),
     });
 
-    console.log('Creating project with streaming...');
+    console.log('Creating project with custom steps and streaming...');
     console.log(`Project name: ${projectData.name}`);
 
     // Print debug information
@@ -119,8 +124,8 @@ async function runExample() {
     console.error('Error:', error.message);
     console.log('\nTROUBLESHOOTING:');
     console.log('1. Check your .env file for correct API_KEY and API_BASE_URL');
-    console.log('2. Make sure your API key has permission to access the workflow');
-    console.log('3. Check that the workflowId exists and is accessible');
+    console.log('2. Make sure your API key has permission to access the specified tasks');
+    console.log('3. Check that the taskId exists and is accessible');
     console.log('4. Ensure your network connection to the API server is working');
     console.log('\nCONFIGURATION STATUS:');
     console.log(`API Key present: ${config.get('API_KEY') ? 'Yes' : 'No'}`);

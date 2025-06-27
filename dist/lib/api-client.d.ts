@@ -39,58 +39,137 @@ export type ApiClientConfig = z.infer<typeof ApiClientConfigSchema>;
  * Schema for translation/project request
  */
 export declare const ProjectRequestSchema: z.ZodEffects<
-  z.ZodObject<
-    {
-      name: z.ZodString;
-      workflowId: z.ZodString;
-      workflowVersion: z.ZodNumber;
-      organizationId: z.ZodString;
-      owners: z.ZodArray<z.ZodString, 'many'>;
-      inputValue: z.ZodRecord<z.ZodString, z.ZodAny>;
-      useStream: z.ZodOptional<z.ZodBoolean>;
-      webhookUrl: z.ZodOptional<z.ZodUnion<[z.ZodString, z.ZodLiteral<''>]>>;
-    },
-    'strip',
-    z.ZodTypeAny,
+  z.ZodEffects<
+    z.ZodObject<
+      {
+        name: z.ZodString;
+        workflowId: z.ZodOptional<z.ZodString>;
+        workflowVersion: z.ZodOptional<z.ZodNumber>;
+        steps: z.ZodOptional<
+          z.ZodArray<
+            z.ZodObject<
+              {
+                taskId: z.ZodString;
+                indentLevel: z.ZodDefault<z.ZodNumber>;
+              },
+              'strip',
+              z.ZodTypeAny,
+              {
+                taskId: string;
+                indentLevel: number;
+              },
+              {
+                taskId: string;
+                indentLevel?: number | undefined;
+              }
+            >,
+            'many'
+          >
+        >;
+        organizationId: z.ZodString;
+        owners: z.ZodArray<z.ZodString, 'many'>;
+        inputValues: z.ZodArray<z.ZodRecord<z.ZodString, z.ZodAny>, 'many'>;
+        useStream: z.ZodOptional<z.ZodBoolean>;
+        webhookUrl: z.ZodOptional<z.ZodUnion<[z.ZodString, z.ZodLiteral<''>]>>;
+      },
+      'strip',
+      z.ZodTypeAny,
+      {
+        name: string;
+        organizationId: string;
+        owners: string[];
+        inputValues: Record<string, any>[];
+        workflowVersion?: number | undefined;
+        webhookUrl?: string | undefined;
+        steps?:
+          | {
+              taskId: string;
+              indentLevel: number;
+            }[]
+          | undefined;
+        workflowId?: string | undefined;
+        useStream?: boolean | undefined;
+      },
+      {
+        name: string;
+        organizationId: string;
+        owners: string[];
+        inputValues: Record<string, any>[];
+        workflowVersion?: number | undefined;
+        webhookUrl?: string | undefined;
+        steps?:
+          | {
+              taskId: string;
+              indentLevel?: number | undefined;
+            }[]
+          | undefined;
+        workflowId?: string | undefined;
+        useStream?: boolean | undefined;
+      }
+    >,
     {
       name: string;
       organizationId: string;
-      workflowVersion: number;
       owners: string[];
-      workflowId: string;
-      inputValue: Record<string, any>;
+      inputValues: Record<string, any>[];
+      workflowVersion?: number | undefined;
       webhookUrl?: string | undefined;
+      steps?:
+        | {
+            taskId: string;
+            indentLevel: number;
+          }[]
+        | undefined;
+      workflowId?: string | undefined;
       useStream?: boolean | undefined;
     },
     {
       name: string;
       organizationId: string;
-      workflowVersion: number;
       owners: string[];
-      workflowId: string;
-      inputValue: Record<string, any>;
+      inputValues: Record<string, any>[];
+      workflowVersion?: number | undefined;
       webhookUrl?: string | undefined;
+      steps?:
+        | {
+            taskId: string;
+            indentLevel?: number | undefined;
+          }[]
+        | undefined;
+      workflowId?: string | undefined;
       useStream?: boolean | undefined;
     }
   >,
   {
     name: string;
     organizationId: string;
-    workflowVersion: number;
     owners: string[];
-    workflowId: string;
-    inputValue: Record<string, any>;
+    inputValues: Record<string, any>[];
+    workflowVersion?: number | undefined;
     webhookUrl?: string | undefined;
+    steps?:
+      | {
+          taskId: string;
+          indentLevel: number;
+        }[]
+      | undefined;
+    workflowId?: string | undefined;
     useStream?: boolean | undefined;
   },
   {
     name: string;
     organizationId: string;
-    workflowVersion: number;
     owners: string[];
-    workflowId: string;
-    inputValue: Record<string, any>;
+    inputValues: Record<string, any>[];
+    workflowVersion?: number | undefined;
     webhookUrl?: string | undefined;
+    steps?:
+      | {
+          taskId: string;
+          indentLevel?: number | undefined;
+        }[]
+      | undefined;
+    workflowId?: string | undefined;
     useStream?: boolean | undefined;
   }
 >;
