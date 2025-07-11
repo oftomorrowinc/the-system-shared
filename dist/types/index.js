@@ -41,3 +41,4 @@ __exportStar(require('./tool'), exports);
 __exportStar(require('./user'), exports);
 __exportStar(require('./workflow'), exports);
 __exportStar(require('./monthly-token-rollup'), exports);
+__exportStar(require('./api-key'), exports);
